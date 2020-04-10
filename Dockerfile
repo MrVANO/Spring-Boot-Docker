@@ -1,17 +1,13 @@
 # For Java 8, try this
-FROM openjdk:8-jdk-alpine
+FROM adoptopenjdk/maven-openjdk8
 
-# For Java 11, try this
-#FROM adoptopenjdk/openjdk11:alpine-jre
-
-# Refer to Maven build -> finalName
-ARG JAR_FILE=target/spring-boot-web.jar
-
-# cd /opt/app
+RUN mkdir -p /opt/app/src
+COPY src /opt/app/src
 WORKDIR /opt/app
-
+COPY pom.xml /opt/app
+RUN mvn clean package
 # cp target/spring-boot-web.jar /opt/app/app.jar
-COPY ${JAR_FILE} app.jar
+WORKDIR /opt/app/target
 
 # java -jar /opt/app/app.jar
-ENTRYPOINT ["java","-jar","app.jar"]
+ENTRYPOINT ["java","-jar","spring-boot-web.jar"]
