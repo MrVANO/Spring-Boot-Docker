@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Collections;
+
 @SpringBootApplication
 @Controller
 public class StartApplication {
@@ -17,6 +19,9 @@ public class StartApplication {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(StartApplication.class, args);
+        SpringApplication app = new SpringApplication(StartApplication.class);
+        app.setDefaultProperties(Collections
+                .singletonMap("server.port", "80"));
+        app.run(args);
     }
 }
