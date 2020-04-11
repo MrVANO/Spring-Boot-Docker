@@ -15,7 +15,7 @@ public class StartApplication {
     @ResponseBody
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
-        return "Hello";
+        return "Hello. Test message for continuous deployment v 0.1";
     }
 
     public static void main(String[] args) {
